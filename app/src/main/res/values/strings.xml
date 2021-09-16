@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="change_text">Change Currency</string>
+    <string name="dollars">dollars</string>
+    <string name="exchange_won">환전 금액(원)</string>
+</resources>
