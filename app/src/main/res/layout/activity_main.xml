@@ -26,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="104dp"
         android:text="@string/change_text"
+        android:onClick="onBtnClicked"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dollarsInput" />
