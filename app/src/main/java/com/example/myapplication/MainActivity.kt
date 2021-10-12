@@ -15,8 +15,9 @@ class MainActivity : AppCompatActivity() {
         //메소드 안에 클래스를 생성하는 것 : 중첩 클래스
         class BtnListener : View.OnClickListener{
             override fun onClick(v: View?){
-                //(어디다띄울거니,메시지는 뭐니,얼마동안보여줄거니).이와같은 다이얼로그 창은 show()메소드로 띄워주기
-                Toast.makeText(applicationContext,"버튼이 눌렸습니다",Toast.LENGTH_SHORT).show()
+                //그냥 this 사용하면 안됨, BtnListener 는 UI를 구현하는 클래스가 아니어서
+                //(엑티비티 컴포넌트를 구현하고 있는 객체, 문자열, 출력 시간 설정)
+                Toast.makeText(this@MainActivity,"버튼이 눌렸습니다",Toast.LENGTH_SHORT).show()
             }
         }
 
