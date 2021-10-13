@@ -3,25 +3,27 @@ package com.example.myapplication
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import android.widget.Toast
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
-//                      클래스 상속            인터페이스 상
-//클래스 상속은 조상이 하나, 인터페이스 상속은 여러개 받을 수 있다.
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         var btnView: Button = findViewById(R.id.btnView)
-        btnView.setOnClickListener(this)
-    }
-    override fun onClick(v: View?) {
-        Toast.makeText(
-            applicationContext,
-            "버튼이 눌렸습니다",
-            Toast.LENGTH_SHORT
-        ).show()
+        var statusTextView:TextView = findViewById(R.id.textView)
+        btnView.setOnClickListener(object: View.OnClickListener{
+            override fun onClick(v: View?) {
+                statusTextView.text = "short"
+            }
+        })
+        btnView.setOnLongClickListener(object: View.OnLongClickListener{
+            override fun onLongClick(v: View?): Boolean {
+                statusTextView.text = "long"
+                return false        //true 반환하면 얘가 완벽하게 처리한거여서 다른데로 안넘어감 false 하면 종료 후 다른 메소드로 넘어감
+            }
+        })
     }
 }
