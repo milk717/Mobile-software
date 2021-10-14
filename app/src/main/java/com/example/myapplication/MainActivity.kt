@@ -28,13 +28,18 @@ class MainActivity : AppCompatActivity(){
         if(m == null) return
         var x:Float = m.x
         var y:Float = m.y
-        
+
         when(m.action){
-            MotionEvent.ACTION_DOWN -> sb.append("손가락을 누름 $x, $y\n")
-            MotionEvent.ACTION_UP -> sb.append("손가락을 뗌 $x, $y\n")
-            MotionEvent.ACTION_MOVE -> sb.append("손가락을 이동 $x, $y\n")
-            else -> sb.append("\n")
+            MotionEvent.ACTION_DOWN -> outMessage("손가락을 누름" ,x,y)
+            MotionEvent.ACTION_UP -> outMessage("손가락을 뗌",x,y)
+            MotionEvent.ACTION_MOVE -> outMessage("손가락을 이동" ,x,y)
+            else -> outMessage("액션 없음",x,y)
         }
+        textView.text = sb.toString()
+    }
+    private fun outMessage(msg:String, x:Float, y:Float){
+        var textView:TextView = findViewById(R.id.textView)
+        sb.append("%-10s: %.2f %.2f\n".format(msg,x,y))
         textView.text = sb.toString()
     }
 }
