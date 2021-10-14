@@ -15,12 +15,10 @@ class MainActivity : AppCompatActivity(){
         setContentView(R.layout.activity_main)
 
         val myView: View = findViewById(R.id.myView)
-        myView.setOnTouchListener(object: View.OnTouchListener{
-            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
-                handleTouch(event)
-                return true     //확실하게 처리했다.
-            }
-        })
+        myView.setOnTouchListener { _, event ->         //두개의 파라미터가 있을 때는 사용되지 않아도 생략은 불가능 '_'로 하기
+            handleTouch(event)
+            true     //확실하게 처리했다.
+        }
     }
 
     private fun handleTouch(m:MotionEvent?){        //세이프콜 해줘야함: onTouch에서 전달하는 값이 null일수도 있어서
