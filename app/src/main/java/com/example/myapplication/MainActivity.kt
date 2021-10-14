@@ -24,12 +24,12 @@ class MainActivity : AppCompatActivity(){
     }
 
     private fun handleTouch(m:MotionEvent?){        //세이프콜 해줘야함: onTouch에서 전달하는 값이 null일수도 있어서
-        
-        var x:Float? = m?.x
-        var y:Float? = m?.y
         var textView:TextView = findViewById(R.id.textView)
-
-        when(m?.action){
+        if(m == null) return
+        var x:Float = m.x
+        var y:Float = m.y
+        
+        when(m.action){
             MotionEvent.ACTION_DOWN -> sb.append("손가락을 누름 $x, $y\n")
             MotionEvent.ACTION_UP -> sb.append("손가락을 뗌 $x, $y\n")
             MotionEvent.ACTION_MOVE -> sb.append("손가락을 이동 $x, $y\n")
