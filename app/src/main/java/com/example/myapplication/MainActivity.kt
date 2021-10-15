@@ -1,8 +1,8 @@
 package com.example.myapplication
 
 import android.os.Bundle
-import android.view.View
 import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
@@ -12,33 +12,23 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        class RadioListener : View.OnClickListener{
-            override fun onClick(v: View?) {
-                if(v == null) return
+        val radioGroup:RadioGroup = findViewById(R.id.radioGroup)
+        radioGroup.setOnCheckedChangeListener(object : RadioGroup.OnCheckedChangeListener{
+            override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
                 var sb = StringBuilder()
-                when(v.id){
-                    R.id.red -> sb.append((v as RadioButton).text)
-                    R.id.blue ->sb.append((v as RadioButton).text)
-                    R.id.green ->sb.append((v as RadioButton).text)
-                }
-                sb.append(" 을(를) 선택했군요. ")
+                var radioButton:RadioButton = findViewById(checkedId)
+                sb.append(radioButton.text)
+                sb.append("를 선택했군요.")
                 showToast(sb.toString())
             }
-        }
-        val radioRed:RadioButton = findViewById(R.id.red)
-        val radioBlue:RadioButton = findViewById(R.id.blue)
-        val radioGreen:RadioButton = findViewById(R.id.green)
-        
-        when{
-            radioRed.isChecked -> showToast("Red 가 기본 선택되어 있습니다. ")
-            radioBlue.isChecked -> showToast("Blue 가 기본 선택되어 있습니다. ")
-            radioGreen.isChecked -> showToast("Green 가 기본 선택되어 있습니다. ")
-        }
+        })
 
-        val lis = RadioListener()
-        radioRed.setOnClickListener(lis)
-        radioBlue.setOnClickListener(lis)
-        radioGreen.setOnClickListener(lis)
+        var id:Int =radioGroup.checkedRadioButtonId
+        when(id){
+            R.id.red->showToast("Red 가 기본 선택")
+            R.id.blue->showToast("blue 가 기본 선택")
+            R.id.green->showToast("green 가 기본 선택")
+        }
     }
     fun showToast(msg:String){
         Toast.makeText(applicationContext,msg,Toast.LENGTH_SHORT).show()
