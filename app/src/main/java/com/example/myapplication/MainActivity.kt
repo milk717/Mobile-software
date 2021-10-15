@@ -19,11 +19,15 @@ class MainActivity : AppCompatActivity(){
         val buttonPay: Button = findViewById(R.id.button)
         buttonPay.setOnClickListener{
             var sb = StringBuilder()
+
             if (checkAmericano.isChecked)sb.append(" Americano ")
             if (checkLatte.isChecked)sb.append(" Latte ")
             if (checkDecaf.isChecked)sb.append(" Decaf ")
             sb.append(" are order. Thanks!")
-
+            if(!checkAmericano.isChecked and !checkLatte.isChecked and !checkDecaf.isChecked){
+                sb.delete(0,sb.length)
+                sb.append(" 메뉴를 선택해 주세요. ")
+            }
             Toast.makeText(applicationContext,
                 sb.toString(),Toast.LENGTH_SHORT).show()
         }
