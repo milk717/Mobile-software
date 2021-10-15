@@ -1,8 +1,8 @@
 package com.example.myapplication
 
 import android.os.Bundle
-import android.view.inputmethod.EditorInfo
-import android.widget.EditText
+import android.widget.Button
+import android.widget.CheckBox
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
@@ -12,17 +12,20 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val srchEditText:EditText = findViewById(R.id.editText)
-        srchEditText.setOnEditorActionListener { _, actionId, _ ->
-            if (actionId == EditorInfo.IME_ACTION_SEND) {
-                Toast.makeText(
-                    applicationContext,
-                    "탐색 문자열은 ${srchEditText.text}",
-                    Toast.LENGTH_SHORT
-                ).show()
-                true
-            }
-            false
+        val checkAmericano:CheckBox = findViewById(R.id.checkAmericano)
+        val checkLatte:CheckBox = findViewById(R.id.checkBoxLatte)
+        val checkDecaf:CheckBox = findViewById(R.id.checkDecaf)
+
+        val buttonPay: Button = findViewById(R.id.button)
+        buttonPay.setOnClickListener{
+            var sb = StringBuilder()
+            if (checkAmericano.isChecked)sb.append(" Americano ")
+            if (checkLatte.isChecked)sb.append(" Latte ")
+            if (checkDecaf.isChecked)sb.append(" Decaf ")
+            sb.append(" are order. Thanks!")
+
+            Toast.makeText(applicationContext,
+                sb.toString(),Toast.LENGTH_SHORT).show()
         }
     }
 }
