@@ -5,64 +5,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <TextView
         android:id="@+id/textView"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:background="#F079F6"
-        android:textColor="#FFFFFF"
-        android:text="Choose your favorite color!"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintHorizontal_bias="0.1"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="39dp"
+        android:background="#ff993300"
+        android:text="Enter your course evaluation score"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <RadioButton
-            android:id="@+id/red"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Red"
-            android:checked="true"
-            android:textSize="20sp"
-            android:textColor="#FF0000" />
-
-        <RadioButton
-            android:id="@+id/blue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Blue"
-            android:textSize="20sp"
-            android:textColor="#0000FF" />
-
-        <RadioButton
-            android:id="@+id/green"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Green"
-            android:textSize="20sp"
-            android:textColor="#00FF00" />
-
-    </RadioGroup>
+    <RatingBar
+        android:id="@+id/ratingBar"
+        style="@android:style/Widget.DeviceDefault.Light.RatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:numStars="5"
+        android:rating="2.5"
+        android:stepSize=".5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select"
-        android:textAllCaps="false"
+        android:layout_marginTop="184dp"
+        android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.252" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
