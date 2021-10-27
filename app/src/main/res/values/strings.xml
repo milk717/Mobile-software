@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">My Application</string>
-    <string name="first_button">첫 번째 버튼</string>
-    <string name="second_button">두 번째 버튼</string>
+    <string name="message_portrait">세로방향</string>
+    <string name="message_landscape">가로방향</string>
+    <string name="btn_confirm">확인</string>
+    <string name="message_hint">이름을 입력하세요</string>
 </resources>
