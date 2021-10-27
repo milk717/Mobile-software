@@ -3,6 +3,7 @@ package com.example.myapplication
 import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 private const val  TAG = "Orientation"
@@ -35,6 +36,8 @@ class MainActivity : AppCompatActivity(){
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
         Log.d(TAG, "onRestoreInstanceState()호출")
+        var s = savedInstanceState.getString(KEY_NAME)
+        Toast.makeText(applicationContext,"복원한 문자열은 $s",Toast.LENGTH_SHORT).show()
     }
 
     override fun onStart() {
