@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">My Application</string>
-    <string name="message_portrait">세로방향</string>
-    <string name="message_landscape">가로방향</string>
-    <string name="btn_confirm">확인</string>
-    <string name="message_hint">이름을 입력하세요</string>
+    <string name="_1">1열</string>
+    <string name="_2">2열</string>
+    <string name="_3">3열</string>
+    <string name="_1_">1행</string>
+    <string name="_2_">2행</string>
+    <string name="_3_">3행</string>
 </resources>
