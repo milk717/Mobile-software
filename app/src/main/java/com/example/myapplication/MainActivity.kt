@@ -2,20 +2,34 @@ package com.example.myapplication
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 
 private const val  TAG = "Orientation"
 class MainActivity : AppCompatActivity(){
 
+    private lateinit var nameEditText: EditText
+    private val KEY_NAME = "first_name"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        nameEditText = findViewById(R.id.nameEditText)
         Log.d(TAG, "onCreate()호출")
+
+        if(savedInstanceState != null){
+            var strName = savedInstanceState.getString(KEY_NAME)
+            nameEditText.setText(strName)
+        }
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         Log.d(TAG, "onSaveInstanceState()호출")
+
+        var strName:String = nameEditText.text.toString()
+        outState.putString(KEY_NAME, strName)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
