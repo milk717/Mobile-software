@@ -1,85 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="10dp"
+    android:layout_marginStart="10dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="10dp"
     android:orientation="vertical">
 
-    <LinearLayout
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:text="@string/title"
+        android:textSize="18sp"
+        android:textColor="#61380B"
+        android:gravity="center"
+        />
 
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@android:color/holo_red_light"
-            android:text="@string/_1"
-            android:textSize="24sp"
-            android:gravity="start|top"
-            />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@android:color/holo_green_light"
-            android:text="@string/_2"
-            android:textSize="24sp"
-            android:gravity="center"/>
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@android:color/holo_blue_light"
-            android:text="@string/_3"
-            android:textSize="24sp"
-            android:gravity="end|bottom"/>
-
-    </LinearLayout>
-
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:layout_marginTop="15dp"
+        android:text="@string/artist"
+        android:textColor="#22741C"
+        android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@android:color/holo_blue_light"
-            android:text="@string/_1_"
-            android:textSize="24sp"
-            android:gravity="start|top"/>
+    <ImageView
+        android:id="@+id/nightImageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:adjustViewBounds="true"
+        android:maxWidth="300dp"
+        android:maxHeight="300dp"
+        android:src="@drawable/starry_night"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"/>
 
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@android:color/holo_green_light"
-            android:text="@string/_2_"
-            android:textSize="24sp"
-            android:gravity="center"
-            />
+    <TextView
+        android:id="@+id/desTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/desc"
+        android:textColor="#61380B"
+        android:textSize="14sp"
+        android:layout_gravity="center"
+        android:visibility="invisible"/>
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:background="@android:color/holo_red_light"
-            android:text="@string/_3_"
-            android:textSize="24sp"
-            android:gravity="end|bottom"/>
-    </LinearLayout>
 </LinearLayout>
