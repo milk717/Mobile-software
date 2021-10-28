@@ -1,10 +1,10 @@
 package com.example.myapplication
 
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
+import android.widget.CalendarView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -12,20 +12,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val callbackButton: Button = findViewById(R.id.callbackButton)
-        //View 는 제일 상위 layout
-        val mainLayout: View = findViewById(R.id.main_layout_id)
-        callbackButton.setOnClickListener {
-            showSnackbar(mainLayout)
+        var calendar: CalendarView = findViewById(R.id.calendar)
+        var date_view: TextView = findViewById(R.id.date_view)
+
+        calendar.setOnDateChangeListener { _, year, month, dayOfMonth ->
+            date_view.text = String.format(
+                Locale.KOREA,
+                "%d-%d-%d", year, month + 1, dayOfMonth
+            )
         }
     }
-    private fun showSnackbar(view:View){
-        val mySnackbar:Snackbar = Snackbar.make(view,
-        "메시지를 삭제할까요?",Snackbar.LENGTH_SHORT)
-        mySnackbar.setAction("취소"){
-            mySnackbar.dismiss()        //스낵바 사라지게
-        }
-        mySnackbar.show()
-    }
+
 }
 
