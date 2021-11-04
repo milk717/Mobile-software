@@ -1,37 +1,44 @@
 package com.example.myapplication
 
+import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
-import android.widget.TimePicker
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import java.time.LocalDateTime
 
 class MainActivity : AppCompatActivity() {
     private var status:Boolean = false
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        var timePicker:TimePicker = findViewById(R.id.timePicker)
         var txtTime:TextView = findViewById(R.id.txtTime)
-        var btnToggle24: Button = findViewById(R.id.btnToggle24)
+        var btnNow: Button = findViewById(R.id.btnNow)
+        var btnToggleButton:Button = findViewById(R.id.btnToggle24)
 
-        timePicker.setOnTimeChangedListener { _, hourOfDay, minute ->
-            txtTime.text = getTime(hourOfDay,minute)
+        btnNow.setOnClickListener {
+            val date = LocalDateTime.now()
+            txtTime.text = getTimeView(date.hour, date.minute)
         }
-
-        btnToggle24.setOnClickListener {
+        btnToggleButton.setOnClickListener {
             status = !status
+            val date = LocalDateTime.now()
+            txtTime.text = getTimeView(date.hour, date.minute)
         }
     }
-
-    private fun getTime(h:Int, m:Int):String{
+    private fun getTimeView(h:Int, m:Int):String {
         var sb = StringBuilder()
-        if(status)
+        if (status)
             sb.append("$h:$m")
-        else{
-            if(h>12) sb.append("${h-12}:$m PM")
-            else sb.append("$h:$m AM")
+        else {
+            if (h > 12)
+                sb.append("${h - 12}:$m PM")
+            else
+                sb.append("$h:$m AM")
         }
         return sb.toString()
     }
