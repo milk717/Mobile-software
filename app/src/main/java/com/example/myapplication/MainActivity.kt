@@ -1,6 +1,5 @@
 package com.example.myapplication
 
-import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -20,12 +19,9 @@ class MainActivity : AppCompatActivity() {
         button.setOnClickListener {
             var str = editText.text.toString()
 
-            //ComponentName(package, activity)
-            var cn = ComponentName("com.example.myapplication", "com.example.myapplication.SubActivity")
-            var i = Intent()
+            var i = Intent(this, SubActivity::class.java)
                 .apply {
-                    component = cn
-                    putExtra(EXTRA_MESSAGE_STR,str)
+                    this.putExtra(EXTRA_MESSAGE_STR, str)
                 }
 
             startActivity(i)
