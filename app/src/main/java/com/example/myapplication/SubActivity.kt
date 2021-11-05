@@ -1,5 +1,7 @@
 package com.example.myapplication
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -11,29 +13,21 @@ class SubActivity : AppCompatActivity() {
         setContentView(R.layout.activity_sub)
 
         val editText: EditText = findViewById(R.id.editText)
-
-//        var msg:String? = intent.getStringExtra(EXTRA_MESSAGE_STR)
-//        editText.setText("수신 메시지는 $msg")
-
-        //bundle 타입은 null safety 필수
-        var extras:Bundle? = intent.extras
-        
-        //Elvis 연산 사용 -> intent.extras 자체에서 null 값을 가질 수도 있다고 작성
-        /* Elvis 연산이 의미하는 뜻은 아래와 같다.
-        var extrasElvisMean:Bundle? = null
-        if (intent == null || intent.extras == null)
-            extrasElvisMean = null
-        */
-        //이게 더 안정적인 코드
-        var extras2= intent.extras ?: null
+        var extras= intent.extras ?: null
         if(intent.hasExtra(EXTRA_MESSAGE_STR)){
-            var msg:String? = extras2?.getString(EXTRA_MESSAGE_STR)
+            var msg:String? = extras?.getString(EXTRA_MESSAGE_STR)
             editText.setText("수신 메시지는 $msg")
         }
 
         val button: Button = findViewById(R.id.button)
         button.setOnClickListener {
+            val data = Intent() //메인에서 서브 호출시 인텐트객체 불러올땐 파라미터 필요하지만 반대는 필요없다.
+            val returnString = editText.text.toString()
+            //메인에서 서브로 데이터 전달하는 것과 동일하게 putExtra(key, value) 전달하기
+            data.putExtra(RETURN_MESSAGE_STR, returnString)
+            setResult(Activity.RESULT_OK, data)
             finish()
         }
     }
+
 }
