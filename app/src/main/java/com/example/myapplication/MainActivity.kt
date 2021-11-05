@@ -19,7 +19,10 @@ class MainActivity : AppCompatActivity() {
         button.setOnClickListener {
             var str = editText.text.toString()
             var i = Intent(this, SubActivity::class.java)
-            i.putExtra(EXTRA_MESSAGE_STR, str)
+                .apply { 
+                    //this 는 i 라는 인텐트를 가리킴, 생략가능
+                    this.putExtra(EXTRA_MESSAGE_STR, str)
+                }
             startActivity(i)
         }
     }

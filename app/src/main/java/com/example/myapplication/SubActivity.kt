@@ -13,7 +13,7 @@ class SubActivity : AppCompatActivity() {
         //null-safety 처리 필수
         var msg:String? = intent.getStringExtra(EXTRA_MESSAGE_STR)
         val editText: EditText = findViewById(R.id.editText)
-        editText.setText(msg)
+        editText.setText("수신 메시지는 $msg")
 
         val button: Button = findViewById(R.id.button)
         button.setOnClickListener {
