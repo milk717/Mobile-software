@@ -1,12 +1,13 @@
 package com.example.myapplication
 
+import android.content.ComponentName
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 
-const val EXTRA_MESSAGE_STR = "com.example.intentsample.message"
+const val EXTRA_MESSAGE_STR = "com.example.myapplication.message"
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,14 +19,17 @@ class MainActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             var str = editText.text.toString()
-            var i = Intent(this, SubActivity::class.java)
-                .apply { 
-                    //this 는 i 라는 인텐트를 가리킴, 생략가능
-                    this.putExtra(EXTRA_MESSAGE_STR, str)
+
+            //ComponentName(package, activity)
+            var cn = ComponentName("com.example.myapplication", "com.example.myapplication.SubActivity")
+            var i = Intent()
+                .apply {
+                    component = cn
+                    putExtra(EXTRA_MESSAGE_STR,str)
                 }
+
             startActivity(i)
         }
     }
-
 }
 
