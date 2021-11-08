@@ -1,22 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single" >
+    <group android:checkableBehavior="single">
         <item
-            android:id="@+id/menu_apple"
-            android:icon="@android:drawable/ic_menu_manage"
-            android:title="사과"
-            app:showAsAction="ifRoom|withText"/>
+            android:id="@+id/menu_yellow"
+            android:title="노란색" />
         <item
-            android:id="@+id/menu_graph"
-            android:icon="@android:drawable/ic_menu_delete"
-            android:title="포도"
-            app:showAsAction="ifRoom|withText"/>
+            android:id="@+id/menu_green"
+            android:title="초록색" />
         <item
-            android:id="@+id/menu_banana"
-            android:icon="@android:drawable/ic_menu_add"
-            android:title="바나나"
-            app:showAsAction="ifRoom|withText"/>
+            android:id="@+id/menu_blue"
+            android:title="파란색" />
     </group>
 </menu>

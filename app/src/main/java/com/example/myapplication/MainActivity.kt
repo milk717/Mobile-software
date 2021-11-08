@@ -2,51 +2,47 @@ package com.example.myapplication
 
 import android.graphics.Color
 import android.os.Bundle
-import android.view.Menu
+import android.view.ContextMenu
 import android.view.MenuItem
-import android.widget.Toast
+import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
 
 class MainActivity : AppCompatActivity() {
-    lateinit var layoutView: ConstraintLayout
+    lateinit var textView:TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        layoutView = findViewById(R.id.layoutView)
+        textView = findViewById(R.id.textView)
+        registerForContextMenu(textView)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return super.onCreateOptionsMenu(menu)
+    override fun onCreateContextMenu(
+        menu: ContextMenu?,
+        v: View?,
+        menuInfo: ContextMenu.ContextMenuInfo?
+    ) {
+        super.onCreateContextMenu(menu, v, menuInfo)
+        menuInflater.inflate(R.menu.menu_main,menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem) =
-        when(item.itemId){
-            R.id.menu_apple->{
-                layoutView.setBackgroundColor(Color.RED)
-                item.isChecked = false
-                showToast(item.title.toString())
+    override fun onContextItemSelected(item: MenuItem)=
+        when (item.itemId){
+            R.id.menu_yellow->{
+                textView.setBackgroundColor(Color.YELLOW)
                 true
             }
-            R.id.menu_graph->{
-                layoutView.setBackgroundColor(Color.MAGENTA)
-                item.isChecked = false
-                showToast(item.title.toString())
+            R.id.menu_green->{
+                textView.setBackgroundColor(Color.GREEN)
                 true
             }
-            R.id.menu_banana->{
-                layoutView.setBackgroundColor(Color.YELLOW)
-                item.isChecked = false
-                showToast(item.title.toString())
+            R.id.menu_blue->{
+                textView.setBackgroundColor(Color.BLUE)
                 true
             }
-            else -> super.onOptionsItemSelected(item)
+            else->super.onContextItemSelected(item)
         }
 
-    private fun showToast(msg:String){
-        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show()
-    }
+
 }
 
