@@ -71,15 +71,22 @@ class MainActivity : AppCompatActivity() {
         radioButton2.text = wordBank[curIndex].number_2
         radioButton3.text = wordBank[curIndex].number_3
         radioButton4.text = wordBank[curIndex].number_4
+        checkInit()
     }
     private fun checkAnswer(userAns:Int){
         val correctAns = wordBank[curIndex].answer
         val message = if(userAns == correctAns){
-            "정답입니다."
+            resources.getString(R.string.right_ans_msg)
         }else{
-            "오답입니다."
+            resources.getString(R.string.wrong_ans_msg)
         }
         Toast.makeText(applicationContext,message,Toast.LENGTH_SHORT).show()
+    }
+    private fun checkInit(){
+        radioButton1.isChecked = false
+        radioButton2.isChecked = false
+        radioButton3.isChecked = false
+        radioButton4.isChecked = false
     }
 }
 
