@@ -6,8 +6,13 @@ import android.widget.RadioButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 
 class MainActivity : AppCompatActivity() {
+
+    private val wordViewModel:WordViewModel by lazy{
+        ViewModelProvider(this).get(WordViewModel::class.java)
+    }
 
     private lateinit var wordTextView: TextView
     private lateinit var radioButton1: RadioButton
@@ -17,14 +22,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var nextButton: Button
     private lateinit var prevButton: Button
 
-    private val wordBank = listOf<Word>(
-        Word("부주의한, 소홀한", "degenerate", "unity", "inadvertent", "array", 3),
-        Word("쇠약하게 하다", "vanity", "underhand", "enslave", "debilitate", 4),
-        Word("(위험·곤란)제거하다", "artisan", "sadistic", "glossy", "obviate", 4),
-        Word("우아한", "prostrate", "delude", "urbane", "renowned", 3),
-        Word("활기있게 하다", "bereave", "enliven", "occult", "besiege", 2)
-    )
-    private var curIndex:Int = 0;       //단어 인덱스 초기값
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,16 +37,12 @@ class MainActivity : AppCompatActivity() {
 
         nextButton = findViewById(R.id.nextButton)
         nextButton.setOnClickListener {
-            curIndex = (curIndex + 1) % wordBank.size
+            wordViewModel.moveToNext()
             updateWordQuiz()
         }
         prevButton = findViewById(R.id.prevButton)
         prevButton.setOnClickListener {
-            if(curIndex == 0){
-                curIndex = wordBank.size - 1
-            }else{
-                curIndex -= 1
-            }
+            wordViewModel.moveToPrevious()
             updateWordQuiz()
         }
 
@@ -66,15 +60,15 @@ class MainActivity : AppCompatActivity() {
         }
     }
     private fun updateWordQuiz(){
-        wordTextView.text = wordBank[curIndex].question     //question 은 데이터 클래스 안에 프로퍼티
-        radioButton1.text = wordBank[curIndex].number_1
-        radioButton2.text = wordBank[curIndex].number_2
-        radioButton3.text = wordBank[curIndex].number_3
-        radioButton4.text = wordBank[curIndex].number_4
+        wordTextView.text = wordViewModel.curQuestion
+        radioButton1.text = wordViewModel.curNumber1
+        radioButton2.text = wordViewModel.curNumber2
+        radioButton3.text = wordViewModel.curNumber3
+        radioButton4.text = wordViewModel.curNumber4
         checkInit()
     }
     private fun checkAnswer(userAns:Int){
-        val correctAns = wordBank[curIndex].answer
+        val correctAns = wordViewModel.curAnswer
         val message = if(userAns == correctAns){
             resources.getString(R.string.right_ans_msg)
         }else{
