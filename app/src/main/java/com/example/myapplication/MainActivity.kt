@@ -1,117 +1,46 @@
 package com.example.myapplication
 
-import android.app.Activity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.RadioButton
-import android.widget.TextView
+import android.view.View
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import android.widget.Toast
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 
-const val EXTRA_CUR_INDEX = "com.example.wordquiz.extra_cur_index"
 
 class MainActivity : AppCompatActivity() {
-
-    private val wordViewModel: WordViewModel by lazy {
-        ViewModelProvider(this).get(WordViewModel::class.java)
-    }
-
-    private lateinit var wordTextView: TextView
-    private lateinit var radioButton1: RadioButton
-    private lateinit var radioButton2: RadioButton
-    private lateinit var radioButton3: RadioButton
-    private lateinit var radioButton4: RadioButton
-    private lateinit var nextButton: Button
-    private lateinit var prevButton: Button
-    private lateinit var hintButton: Button
-    private lateinit var hintTextView: TextView
-    private var hintReferred: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        wordTextView = findViewById(R.id.wordTextView)
-        radioButton1 = findViewById(R.id.radioButton1)
-        radioButton2 = findViewById(R.id.radioButton2)
-        radioButton3 = findViewById(R.id.radioButton3)
-        radioButton4 = findViewById(R.id.radioButton4)
-        nextButton = findViewById(R.id.nextButton)
-        prevButton = findViewById(R.id.prevButton)
-        hintButton = findViewById(R.id.hintButton)
-        hintTextView = findViewById(R.id.hintTextView)
-        updateWordQuiz()
+        //array 리소스 가져오는 법
+        val planets = resources.getStringArray(R.array.planets_array)
+        //array 리소스를 닫힌 스피너에 가져오는 아답터, 열린것도 가져오긴 하지만 엉성
+        val adapter = ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, planets)
+        //setDropDownViewResource 해야지 펼친것도 제대로 가져옴
+        adapter.setDropDownViewResource(
+            android.R.layout.simple_spinner_dropdown_item
+        )
 
-        //힌트 엑티비티 열기
-        hintButton.setOnClickListener {
-            val intent = HintActivity.newIntent(this@MainActivity, wordViewModel.curIndex)
-            startForResult.launch(intent)
-        }
-
-        nextButton.setOnClickListener {
-            wordViewModel.moveToNext()
-            updateWordQuiz()
-        }
-        prevButton.setOnClickListener {
-            wordViewModel.moveToPrevious()
-            updateWordQuiz()
-        }
-
-        radioButton1.setOnClickListener {
-            checkAnswer(1)
-        }
-        radioButton2.setOnClickListener {
-            checkAnswer(2)
-        }
-        radioButton3.setOnClickListener {
-            checkAnswer(3)
-        }
-        radioButton4.setOnClickListener {
-            checkAnswer(4)
-        }
+        val spinner:Spinner = findViewById(R.id.spinner)
+        spinner.adapter = adapter
+        spinner.onItemSelectedListener = SpinnerListener()
     }
 
-    private val startForResult = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    )
-    { result: ActivityResult ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            hintReferred = result.data?.getBooleanExtra(EXTRA_HINT_SHOWN, false) ?: false
-            if (hintReferred) {
-                hintTextView.setText(R.string.hint_message)
-            } else {
-                hintTextView.text = ""
-            }
+    //이너를 생략하면 바깥에 있는 것 참조 못함
+    inner class SpinnerListener : AdapterView.OnItemSelectedListener{
+        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            //position 은 선택된 것의 인덱스
+            var planet = parent?.getItemAtPosition(position).toString()
+            Toast.makeText(applicationContext, "선택한 행성은 $planet",Toast.LENGTH_SHORT).show()
         }
-    }
 
-    private fun updateWordQuiz() {
-        wordTextView.text = wordViewModel.curQuestion
-        radioButton1.text = wordViewModel.curNumber1
-        radioButton2.text = wordViewModel.curNumber2
-        radioButton3.text = wordViewModel.curNumber3
-        radioButton4.text = wordViewModel.curNumber4
-        checkInit()
-    }
-
-    private fun checkAnswer(userAns: Int) {
-        val correctAns = wordViewModel.curAnswer
-        val message = if (userAns == correctAns) {
-            resources.getString(R.string.right_ans_msg)
-        } else {
-            resources.getString(R.string.wrong_ans_msg)
+        override fun onNothingSelected(parent: AdapterView<*>?) {
+            
         }
-        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun checkInit() {
-        radioButton1.isChecked = false
-        radioButton2.isChecked = false
-        radioButton3.isChecked = false
-        radioButton4.isChecked = false
     }
 }
 
