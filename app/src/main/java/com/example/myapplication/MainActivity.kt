@@ -27,19 +27,17 @@ class MainActivity : AppCompatActivity() {
 
         val spinner:Spinner = findViewById(R.id.spinner)
         spinner.adapter = adapter
-        spinner.onItemSelectedListener = SpinnerListener()
-    }
+        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                //position 은 선택된 것의 인덱스
+                var planet = parent?.getItemAtPosition(position).toString()
+                //parent?.context -> 부모는 메인 엑티비티
+                Toast.makeText(parent?.context, "선택한 행성은 $planet",Toast.LENGTH_SHORT).show()
+            }
 
-    //이너를 생략하면 바깥에 있는 것 참조 못함
-    inner class SpinnerListener : AdapterView.OnItemSelectedListener{
-        override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-            //position 은 선택된 것의 인덱스
-            var planet = parent?.getItemAtPosition(position).toString()
-            Toast.makeText(applicationContext, "선택한 행성은 $planet",Toast.LENGTH_SHORT).show()
-        }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
 
-        override fun onNothingSelected(parent: AdapterView<*>?) {
-            
+            }
         }
     }
 }
