@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
         val spinner:Spinner = findViewById(R.id.spinner)
         spinner.adapter = adapter
-        spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 //position 은 선택된 것의 인덱스
                 var planet = parent?.getItemAtPosition(position).toString()
@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
             override fun onNothingSelected(parent: AdapterView<*>?) {
 
             }
-        }
+        }.also { spinner.onItemSelectedListener = it }  //object 를 통해 만들어진 객체를 스피너에 할당해라, 만들어진 객체 == it
     }
 }
 
