@@ -1,20 +1,43 @@
 package com.example.myapplication
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
 
 class FragmentA : Fragment() {
+
+    var activityCallBack:ButtonListener? = null
+    interface ButtonListener{
+        fun onButtonClick()
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try{
+            if(context is ButtonListener){
+                activityCallBack = context
+            }
+        }catch(e:ClassCastException){
+            throw ClassCastException(context.toString() +
+                    "must implement buttonListener")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //(레이아웃, 레이아웃을 포함할 수 있는 컨테이너, false 는 이렇게 만들어진 레이아웃이 루트뷰가 된다.)
-        return inflater.inflate(R.layout.fragment_a, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_a, container, false)
+        val button: Button = rootView.findViewById(R.id.button)
+        button.setOnClickListener {
+            activityCallBack?.onButtonClick()
+        }
+        return rootView
     }
 
 }
