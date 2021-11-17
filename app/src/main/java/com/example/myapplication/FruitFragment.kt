@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,11 +43,21 @@ class FruitFragment : Fragment() {
         override fun getItemCount() = list.size
     }
     //화면에 띄워줄 리사이클러 뷰 정보를 가져오는 메소드
-    class  MyViewHolder(view: View) : RecyclerView.ViewHolder(view){
+    inner class  MyViewHolder(view: View) : RecyclerView.ViewHolder(view),
+            View.OnClickListener{
+        private lateinit var fruit:Fruit
         var textView: TextView = view.findViewById(R.id.textView)
 
+        init{
+            textView.setOnClickListener(this)
+        }
         fun bind(fruit: Fruit){
-            textView.text = fruit.name
+            this.fruit = fruit
+            textView.text = this.fruit.name
+        }
+
+        override fun onClick(v: View?) {
+            Toast.makeText(context,"${fruit.name} pressed",Toast.LENGTH_SHORT).show()
         }
     }
 }
