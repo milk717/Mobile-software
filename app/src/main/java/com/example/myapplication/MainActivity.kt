@@ -6,26 +6,28 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 
 class MainActivity : AppCompatActivity(){
+    private val fruitViewModel: FruitViewModel by lazy{
+        ViewModelProvider(this).get(FruitViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val list = resources.getStringArray(R.array.fruits)     //읽어와서
-        val listItems = list.toCollection(ArrayList())          //arraylist 타입으로 변환
+        val fruits = fruitViewModel.fruitList
 
         val recyclerView:RecyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = GridLayoutManager(this,2)      //리사이클러뷰가 어떻게 보일지, this 는 어떤화면에 보여줄지
-
-        recyclerView.adapter = MyAdapter(listItems)
+        recyclerView.layoutManager = GridLayoutManager(this,2)
+        recyclerView.adapter = MyAdapter(fruits)
     }
 
-    class MyAdapter(var list:ArrayList<String>) : RecyclerView.Adapter<MyViewHolder>(){
+    class MyAdapter(var list:List<Fruit>) : RecyclerView.Adapter<MyViewHolder>(){
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
             val inflater = LayoutInflater.from(parent.context)
             val view = inflater.inflate(R.layout.item, parent,false)
@@ -33,8 +35,8 @@ class MainActivity : AppCompatActivity(){
         }
 
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-            val name = list[position]
-            holder.textView.text = name
+            val fruit = list[position]
+            holder.bind(fruit)
         }
 
         override fun getItemCount() = list.size
@@ -42,6 +44,10 @@ class MainActivity : AppCompatActivity(){
     //화면에 띄워줄 리사이클러 뷰 정보를 가져오는 메소드
     class  MyViewHolder(view: View) : RecyclerView.ViewHolder(view){
         var textView: TextView = view.findViewById(R.id.textView)
+
+        fun bind(fruit: Fruit){
+            textView.text = fruit.name
+        }
     }
 }
 
