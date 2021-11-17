@@ -16,23 +16,8 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val listItems = ArrayList<String>()
-        listItems.add("Apple")
-        listItems.add("Apricot")
-        listItems.add("Avocado")
-        listItems.add("Banana")
-        listItems.add("Blackberry")
-        listItems.add("Blueberry")
-        listItems.add("Cherry")
-        listItems.add("Coconut")
-        listItems.add("Cranberry")
-        listItems.add("Grape Raisin")
-        listItems.add("Honeydew")
-        listItems.add("Jack fruit")
-        listItems.add("Lemon")
-        listItems.add("Lime")
-        listItems.add("Mango")
-        listItems.add("Watermelon")
+        val list = resources.getStringArray(R.array.fruits)     //읽어와서
+        val listItems = list.toCollection(ArrayList())          //arraylist 타입으로 변환
 
         val recyclerView:RecyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = GridLayoutManager(this,2)      //리사이클러뷰가 어떻게 보일지, this 는 어떤화면에 보여줄지
