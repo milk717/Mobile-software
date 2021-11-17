@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -47,13 +48,14 @@ class FruitFragment : Fragment() {
             View.OnClickListener{
         private lateinit var fruit:Fruit
         var textView: TextView = view.findViewById(R.id.textView)
-
+        var imageView: ImageView = view.findViewById(R.id.imageView)
         init{
             textView.setOnClickListener(this)
         }
         fun bind(fruit: Fruit){
             this.fruit = fruit
             textView.text = this.fruit.name
+            imageView.setImageResource(this.fruit.resId)
         }
 
         override fun onClick(v: View?) {
