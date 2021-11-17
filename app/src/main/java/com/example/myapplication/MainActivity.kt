@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity(){
         listItems.add("Watermelon")
 
         val recyclerView:RecyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)      //리사이클러뷰가 어떻게 보일지, this 는 어떤화면에 보여줄지
+        recyclerView.layoutManager = GridLayoutManager(this,2)      //리사이클러뷰가 어떻게 보일지, this 는 어떤화면에 보여줄지
 
         recyclerView.adapter = MyAdapter(listItems)
     }
