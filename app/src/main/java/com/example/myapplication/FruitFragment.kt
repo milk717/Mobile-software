@@ -27,10 +27,10 @@ class FruitFragment : Fragment() {
         recyclerView.adapter = MyAdapter(fruits)
         return rootView
     }
-    class MyAdapter(var list:List<Fruit>) : RecyclerView.Adapter<MyViewHolder>(){
+    inner class MyAdapter(var list:List<Fruit>) : RecyclerView.Adapter<MyViewHolder>(){
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-            val inflater = LayoutInflater.from(parent.context)
-            val view = inflater.inflate(R.layout.item, parent,false)
+            //val inflater = LayoutInflater.from(parent.context)
+            val view = layoutInflater.inflate(R.layout.item, parent,false)
             return MyViewHolder(view)
         }
 
