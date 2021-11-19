@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="FruitButton">
+    <style name="FruitButton" parent="Widget.AppCompat.Button">
         <item name="android:backgroundTint">@color/dark_blue</item>
         <item name="android:textColor">@color/yellow</item>
     </style>
