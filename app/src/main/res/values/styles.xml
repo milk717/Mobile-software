@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="FruitButton">
+        <item name="android:backgroundTint">@color/dark_blue</item>
+        <item name="android:textColor">@color/yellow</item>
+    </style>
+
+    <style name="FruitButton.Italic">
+        <item name="android:textStyle">italic</item>
+    </style>
+</resources>
