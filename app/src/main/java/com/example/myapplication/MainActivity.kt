@@ -1,30 +1,49 @@
 package com.example.myapplication
 
 import android.os.Bundle
-import android.util.DisplayMetrics
-import android.widget.TextView
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 
 class MainActivity : AppCompatActivity() {
-
+    private val fruitViewModel: FruitViewModel by lazy {
+        ViewModelProvider(this).get(FruitViewModel::class.java)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val recyclerView: RecyclerView
+                = findViewById(R.id.recyclerView)
+        recyclerView.layoutManager = GridLayoutManager(this,3)
+        val fruits = fruitViewModel.fruitList
+        var adapter = MyAdapter(fruits)
+        recyclerView.adapter = adapter
+    }
 
-        val textView: TextView = findViewById(R.id.textView)
-        val dm = resources.displayMetrics
-        val str = """
-            widthPixels = ${dm.widthPixels}
-            heightPixels = ${dm.heightPixels}
-            density = ${dm.density}
-            scaledDensity = ${dm.scaledDensity}
-            densityDpi = ${dm.densityDpi}
-            DENSITY_DEFAULT = ${DisplayMetrics.DENSITY_DEFAULT}            
-            xdpi = ${dm.xdpi}
-            ydpi = ${dm.ydpi}
-            """.trimIndent()
+    class MyViewHolder(view: View):
+        RecyclerView.ViewHolder(view) {
+        var btnView: Button = itemView.findViewById(R.id.btnView)
+    }
 
-        textView.text = str
+    inner class MyAdapter(var list: List<Fruit>)
+        :RecyclerView.Adapter<MyViewHolder>() {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+            val inflater = LayoutInflater.from(parent.context)
+            val view = inflater.inflate(R.layout.item, parent, false)
+            return MyViewHolder(view)
+        }
+        override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+            val fruit = list[position]
+            holder.apply {
+                btnView.text = resources.getString(fruit.resId)
+            }
+        }
+        override fun getItemCount() = list.size
     }
 }
