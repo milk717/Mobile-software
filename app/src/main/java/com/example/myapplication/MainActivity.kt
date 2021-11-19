@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val recyclerView: RecyclerView
                 = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = GridLayoutManager(this,3)
+        recyclerView.layoutManager = LinearLayoutManager(this)
         val fruits = fruitViewModel.fruitList
         var adapter = MyAdapter(fruits)
         recyclerView.adapter = adapter
