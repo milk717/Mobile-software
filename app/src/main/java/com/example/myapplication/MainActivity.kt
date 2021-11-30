@@ -1,49 +1,40 @@
 package com.example.myapplication
 
+import android.content.Context
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 
 
 class MainActivity : AppCompatActivity() {
-    private val fruitViewModel: FruitViewModel by lazy {
-        ViewModelProvider(this).get(FruitViewModel::class.java)
-    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val recyclerView: RecyclerView
-                = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        val fruits = fruitViewModel.fruitList
-        var adapter = MyAdapter(fruits)
-        recyclerView.adapter = adapter
+        //setContentView(R.layout.activity_main)
+        setContentView(MyView(this))
     }
-
-    class MyViewHolder(view: View):
-        RecyclerView.ViewHolder(view) {
-        var btnView: Button = itemView.findViewById(R.id.btnView)
-    }
-
-    inner class MyAdapter(var list: List<Fruit>)
-        :RecyclerView.Adapter<MyViewHolder>() {
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-            val inflater = LayoutInflater.from(parent.context)
-            val view = inflater.inflate(R.layout.item, parent, false)
-            return MyViewHolder(view)
+    class MyView(context: Context): View(context){
+        init{
+            setBackgroundColor(Color.YELLOW)
         }
-        override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-            val fruit = list[position]
-            holder.apply {
-                btnView.text = resources.getString(fruit.resId)
-            }
+
+        override fun onDraw(canvas: Canvas?) {
+            super.onDraw(canvas)
+            if(canvas == null) return
+
+            val w = width.toFloat()
+            val h = height.toFloat()
+
+            val paint = Paint()
+            paint.setARGB(255,255,0,0)
+            paint.strokeWidth = 10f
+            canvas.drawLine(0f,50f,w,50f,paint) //null-safety, 붓 객체 생성해야 에러 안남
+            canvas.drawLine(0f,h-50f,w,h-50f,paint)
+            canvas.drawLine(50f,0f,50f,h,paint)
+            canvas.drawLine(w-50f,0f,w-50f,h,paint)
         }
-        override fun getItemCount() = list.size
     }
 }
