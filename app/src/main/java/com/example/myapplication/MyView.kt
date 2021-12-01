@@ -17,8 +17,8 @@ class MyView(context: Context): View(context) {
 
         canvas.drawBitmap(b, 0f, 0f, null)
 
-        // 하루방 왼쪽 눈 부분
-        val src = Rect(40, 40, 140, 140)
+        // 하루방 오른쪽 눈 부분
+        val src = Rect(140, 60, 180, 150)
 
         var pi = w + 50
         val dst = Rect(pi, 0, pi + w, h)
