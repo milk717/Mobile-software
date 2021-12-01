@@ -1,19 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">My Application</string>
-    <string name="fruit_1">Apple</string>
-    <string name="fruit_2">Avocado</string>
-    <string name="fruit_3">Banana</string>
-    <string name="fruit_4">Blueberry</string>
-    <string name="fruit_5">Blackberry</string>
-    <string name="fruit_6">Cherry</string>
-    <string name="fruit_7">Coconut</string>
-    <string name="fruit_8">Cranberry</string>
-    <string name="fruit_9">Grape raisin</string>
-    <string name="fruit_10">Honey dew</string>
-    <string name="fruit_11">Lemon</string>
-    <string name="fruit_12">Lime</string>
-    <string name="fruit_13">Mango</string>
-    <string name="fruit_14">Orange</string>
-    <string name="fruit_15">Watermelon</string>
-
 </resources>
