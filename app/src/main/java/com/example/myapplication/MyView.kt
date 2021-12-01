@@ -7,23 +7,33 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.view.View
 
-class MyView(context: Context): View(context) {
-    private val mBitmap = Bitmap.createBitmap(600,600,
-        Bitmap.Config.ARGB_8888)
+class MyView(context:Context): View(context) {
+    lateinit var myBitmap: Bitmap
+    lateinit var myCanvas: Canvas
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         super.onSizeChanged(w, h, oldw, oldh)
-        val mCanvas = Canvas(mBitmap)
-        mCanvas.drawColor(Color.YELLOW)
-        val b: Bitmap = BitmapFactory.decodeResource(
-            resources, R.drawable.harubang)
-        mCanvas.drawBitmap(b,20f,20f,null)
+        myBitmap = Bitmap.createBitmap(
+            w, h, Bitmap.Config.ARGB_8888)
+        myCanvas = Canvas(myBitmap)
     }
 
-    override fun onDraw(canvas: Canvas) {
+    override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
-        if (canvas == null) return
-        canvas.drawColor(Color.LTGRAY)
-        canvas.drawBitmap(mBitmap,50f,50f,null)
+        myCanvas.drawColor(Color.BLUE)
+
+        drawEnlargedBitmap()
+        canvas?.drawBitmap(myBitmap, 0f, 0f, null)
+    }
+
+    private fun drawEnlargedBitmap() {
+        var bobBitmap: Bitmap = BitmapFactory.decodeResource(
+            resources, R.drawable.bob)
+        myCanvas.drawBitmap(bobBitmap, 25f, 25f, null)
+
+        bobBitmap = Bitmap.createScaledBitmap(bobBitmap,
+            300, 400, false)
+        val w = bobBitmap.width
+        myCanvas.drawBitmap(bobBitmap, w+25f, 25f, null)
     }
 }
