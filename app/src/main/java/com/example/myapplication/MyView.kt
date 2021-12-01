@@ -5,25 +5,27 @@ import android.graphics.*
 import android.view.View
 
 class MyView(context: Context): View(context) {
-    override fun onDraw(canvas: Canvas?) {
+    private val b: Bitmap = BitmapFactory.decodeResource(
+        resources, R.drawable.harubang)
+    private val w:Int = b.width // 하루방 bitmap 너비
+    private val h:Int = b.height // 하루방 bitmap 높이
+
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         if (canvas == null) return
-
         canvas.drawColor(Color.LTGRAY)
 
-        val paint = Paint()
-        val b:Bitmap = BitmapFactory.decodeResource(resources,
-            R.drawable.harubang)
-        canvas.drawBitmap(b,0f,0f,null)
+        canvas.drawBitmap(b, 0f, 0f, null)
 
-        paint.textSize = 50f
-        var px = 500f
-        var py = 100f
-        canvas.drawText(width.toString(), px, py, paint)
-        canvas.drawText(height.toString(), px+150f, py, paint)
+        // 하루방 왼쪽 눈 부분
+        val src = Rect(40, 40, 140, 140)
 
-        py += 100f
-        canvas.drawText(b.width.toString(), px, py, paint)
-        canvas.drawText(b.height.toString(), px+150f, py, paint)
+        var pi = w + 50
+        val dst = Rect(pi, 0, pi + w, h)
+        canvas.drawBitmap(b, src, dst, null)
+
+        var pj = h + 50
+        val dst2 = Rect(pi, pj, pi + w/2, pj + h/2)
+        canvas.drawBitmap(b, src, dst2, null)
     }
 }
