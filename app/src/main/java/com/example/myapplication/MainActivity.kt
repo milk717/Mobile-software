@@ -2,11 +2,16 @@ package com.example.myapplication
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 
 class MainActivity : AppCompatActivity() {
+
+    private val movieViewModel: MovieViewModel by lazy{
+        ViewModelProvider(this).get(MovieViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,6 +21,6 @@ class MainActivity : AppCompatActivity() {
         var recyclerView:RecyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        recyclerView.adapter = MovieAdapter()
+        recyclerView.adapter = MovieAdapter(movieViewModel.movieList)
     }
 }
