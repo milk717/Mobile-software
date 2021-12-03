@@ -28,4 +28,6 @@ class MovieFragment : Fragment() {
         recyclerView.adapter = MovieAdapter(movieViewModel.movieList)
         return rootView
     }
+
+
 }

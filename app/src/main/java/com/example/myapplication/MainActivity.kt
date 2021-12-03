@@ -1,6 +1,7 @@
 package com.example.myapplication
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 
@@ -20,4 +21,9 @@ class MainActivity : AppCompatActivity() {
                 .commit()                                       //마무리?
         }
     }
+    fun showToast(text: String){
+        Toast.makeText(applicationContext,text, Toast.LENGTH_SHORT).show()
+    }
+
 }
+
