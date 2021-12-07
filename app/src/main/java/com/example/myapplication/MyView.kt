@@ -11,7 +11,7 @@ import android.view.animation.AccelerateInterpolator
 
 const val RADIUS = 100f
 class MyView(context: Context):View(context){
-  private var mx:Float = RADIUS
+  private var my:Float = RADIUS
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
@@ -19,19 +19,19 @@ class MyView(context: Context):View(context){
 
         val paint = Paint()
         paint.color = Color.RED
-        canvas?.drawCircle(mx,300f,RADIUS,paint)        //원 그리기
+        canvas?.drawCircle(550f,my,RADIUS,paint)        //원 그리기
     }
 
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         if(event?.action == MotionEvent.ACTION_DOWN){   //터치 눌렸을 때
-            val valueAnim = ValueAnimator.ofFloat(RADIUS,width- RADIUS)
+            val valueAnim = ValueAnimator.ofFloat(RADIUS, height-RADIUS)
             valueAnim.apply {
-                duration = 2000
+                duration = 2000     //애니메이션이 진행되는 속도
                 interpolator = AccelerateInterpolator()
                 start()
             }
             valueAnim.addUpdateListener { animation ->
-                mx = animation?.animatedValue as Float
+                my = animation?.animatedValue as Float
                 invalidate()
             }
             return true
